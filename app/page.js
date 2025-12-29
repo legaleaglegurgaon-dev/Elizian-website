@@ -106,10 +106,10 @@ const MEMBERSHIP_TIERS = [
     subtitle: 'The Beginning',
     minTokens: 0, 
     multiplier: '1x', 
-    color: 'from-slate-400 to-slate-600',
-    bgColor: 'bg-gradient-to-br from-slate-800/50 to-slate-900/50',
-    borderColor: 'border-slate-600/30',
-    icon: Moon,
+    color: 'from-cyan-400 to-blue-600',
+    bgColor: 'bg-gradient-to-br from-cyan-900/20 to-blue-900/30',
+    borderColor: 'border-cyan-500/30',
+    iconUrl: 'https://customer-assets.emergentagent.com/job_07bdeb1d-ce27-4eee-a224-d204a4c1a442/artifacts/hc8c4iqt_Aether.png',
     perks: ['Access to partner network', 'Basic EZT earning rate', 'Standard booking privileges'] 
   },
   { 
@@ -117,10 +117,10 @@ const MEMBERSHIP_TIERS = [
     subtitle: 'Rising Star',
     minTokens: 2500, 
     multiplier: '1.5x', 
-    color: 'from-amber-600 to-amber-800',
-    bgColor: 'bg-gradient-to-br from-amber-900/30 to-stone-900/50',
-    borderColor: 'border-amber-700/30',
-    icon: Sun,
+    color: 'from-orange-400 to-amber-600',
+    bgColor: 'bg-gradient-to-br from-orange-900/20 to-amber-900/30',
+    borderColor: 'border-orange-500/30',
+    iconUrl: 'https://customer-assets.emergentagent.com/job_07bdeb1d-ce27-4eee-a224-d204a4c1a442/artifacts/bh5myaou_nova.png',
     perks: ['1.5x EZT earnings', 'Priority reservations', 'Early access to events', 'Member-only experiences'] 
   },
   { 
@@ -131,7 +131,7 @@ const MEMBERSHIP_TIERS = [
     color: 'from-yellow-400 to-amber-500',
     bgColor: 'bg-gradient-to-br from-yellow-900/20 to-amber-900/30',
     borderColor: 'border-yellow-500/30',
-    icon: Stars,
+    iconUrl: 'https://customer-assets.emergentagent.com/job_07bdeb1d-ce27-4eee-a224-d204a4c1a442/artifacts/fchzo3ua_luminar.png',
     perks: ['2x EZT earnings', 'Complimentary upgrades', 'Dedicated concierge', 'VIP event access', 'Exclusive partner perks'] 
   },
   { 
@@ -139,10 +139,10 @@ const MEMBERSHIP_TIERS = [
     subtitle: 'Distinguished',
     minTokens: 50000, 
     multiplier: '3x', 
-    color: 'from-emerald-400 to-teal-600',
-    bgColor: 'bg-gradient-to-br from-emerald-900/30 to-teal-900/40',
-    borderColor: 'border-emerald-500/30',
-    icon: Award,
+    color: 'from-orange-500 to-red-600',
+    bgColor: 'bg-gradient-to-br from-orange-900/20 to-red-900/30',
+    borderColor: 'border-orange-500/30',
+    iconUrl: 'https://customer-assets.emergentagent.com/job_07bdeb1d-ce27-4eee-a224-d204a4c1a442/artifacts/rc77bhsc_valiant.png',
     perks: ['3x EZT earnings', 'Personal lifestyle curator', 'Guaranteed reservations', 'Private experiences', 'Luxury gift packages', 'Global partner access'] 
   },
   { 
@@ -150,10 +150,10 @@ const MEMBERSHIP_TIERS = [
     subtitle: 'The Pinnacle',
     minTokens: 150000, 
     multiplier: '5x', 
-    color: 'from-violet-400 to-purple-600',
-    bgColor: 'bg-gradient-to-br from-violet-900/30 to-purple-900/40',
-    borderColor: 'border-violet-500/40',
-    icon: Diamond,
+    color: 'from-yellow-400 to-amber-600',
+    bgColor: 'bg-gradient-to-br from-yellow-900/20 to-amber-900/30',
+    borderColor: 'border-yellow-400/40',
+    iconUrl: 'https://customer-assets.emergentagent.com/job_07bdeb1d-ce27-4eee-a224-d204a4c1a442/artifacts/sczo6o2p_echelon.png',
     perks: ['5x EZT earnings', 'Bespoke experience creation', '24/7 elite concierge', 'Invitation-only events', 'Priority everything', 'Ultimate luxury privileges'] 
   },
 ]
