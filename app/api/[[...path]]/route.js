@@ -1,104 +1,121 @@
-import { MongoClient } from 'mongodb'
-import { v4 as uuidv4 } from 'uuid'
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
-// MongoDB connection
-let client
-let db
+// Simple API handler for Elizian
+const handler = async (request, context) => {
+  const { params } = context;
+  const path = params?.path?.join('/') || '';
+  
+  // Enable CORS
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
 
-async function connectToMongo() {
-  if (!client) {
-    client = new MongoClient(process.env.MONGO_URL)
-    await client.connect()
-    db = client.db(process.env.DB_NAME)
+  // Handle OPTIONS preflight
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, { status: 200, headers: corsHeaders });
   }
-  return db
-}
-
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
-}
-
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
-
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = params
-  const route = `/${path.join('/')}`
-  const method = request.method
 
   try {
-    const db = await connectToMongo()
-
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/root' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
+    // Health check endpoint
+    if (path === 'health' || path === '') {
+      return NextResponse.json(
+        { 
+          status: 'ok', 
+          message: 'Elizian API is running',
+          timestamp: new Date().toISOString(),
+          version: '1.0.0'
+        },
+        { headers: corsHeaders }
+      );
     }
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
+
+    // Config endpoint - returns customizable site config
+    if (path === 'config') {
+      return NextResponse.json(
+        {
+          brandName: 'Elizian',
+          tagline: 'Experience Luxury. Own Prestige.',
+          subTagline: 'Your gateway to lifestyle rewards, powered by blockchain.',
+          tokenName: 'EZT',
+          tokenFullName: 'EZ Tokens',
+          categories: [
+            { name: 'Dining', description: 'Fine dining & restaurants' },
+            { name: 'Events', description: 'Exclusive experiences' },
+            { name: 'Healthcare', description: 'Premium health services' },
+            { name: 'Spa & Salon', description: 'Luxury wellness' },
+            { name: 'Wellness', description: 'Mind & body care' },
+            { name: 'Travel', description: 'Luxury getaways' },
+          ]
+        },
+        { headers: corsHeaders }
+      );
     }
 
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
-      const body = await request.json()
+    // Newsletter signup endpoint
+    if (path === 'newsletter' && request.method === 'POST') {
+      const body = await request.json();
+      const { email } = body;
       
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
+      if (!email) {
+        return NextResponse.json(
+          { error: 'Email is required' },
+          { status: 400, headers: corsHeaders }
+        );
       }
 
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
+      // In production, this would save to database
+      return NextResponse.json(
+        { 
+          success: true, 
+          message: 'Successfully subscribed to newsletter',
+          email 
+        },
+        { headers: corsHeaders }
+      );
+    }
+
+    // Partner inquiry endpoint
+    if (path === 'partner-inquiry' && request.method === 'POST') {
+      const body = await request.json();
+      const { businessName, email, category, message } = body;
+      
+      if (!businessName || !email || !category) {
+        return NextResponse.json(
+          { error: 'Business name, email, and category are required' },
+          { status: 400, headers: corsHeaders }
+        );
       }
 
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
+      // In production, this would save to database and send notification
+      return NextResponse.json(
+        { 
+          success: true, 
+          message: 'Partner inquiry submitted successfully',
+          data: { businessName, email, category }
+        },
+        { headers: corsHeaders }
+      );
     }
 
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
-      
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
-    }
-
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
+    // 404 for unknown routes
+    return NextResponse.json(
+      { error: 'Endpoint not found', path },
+      { status: 404, headers: corsHeaders }
+    );
 
   } catch (error) {
-    console.error('API Error:', error)
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
-      { status: 500 }
-    ))
+    console.error('API Error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error', message: error.message },
+      { status: 500, headers: corsHeaders }
+    );
   }
-}
+};
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const DELETE = handler;
+export const OPTIONS = handler;

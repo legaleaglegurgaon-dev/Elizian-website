@@ -1,14 +1,15 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Next.js MongoDB Template',
-  description: 'A simple template with App Router, MongoDB, and shadcn/ui',
+  title: 'Elizian | Experience Luxury. Own Prestige.',
+  description: 'Your gateway to lifestyle rewards, powered by blockchain. Book premium services and earn EZT tokens.',
+  keywords: 'Elizian, EZT, luxury, rewards, blockchain, crypto, dining, events, healthcare, spa, wellness, travel',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-[#0a0a0a] text-white antialiased">
         {children}
       </body>
     </html>
