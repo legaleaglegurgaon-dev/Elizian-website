@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 body {
     margin: 0;
@@ -15,34 +15,40 @@ body {
 
 @layer base {
   :root {
-        --background: 0 0% 4%;
-        --foreground: 45 100% 96%;
-        --card: 0 0% 7%;
-        --card-foreground: 45 100% 96%;
-        --popover: 0 0% 7%;
-        --popover-foreground: 45 100% 96%;
-        --primary: 43 100% 50%;
-        --primary-foreground: 0 0% 4%;
-        --secondary: 0 0% 12%;
-        --secondary-foreground: 45 100% 96%;
-        --muted: 0 0% 15%;
-        --muted-foreground: 0 0% 60%;
-        --accent: 43 100% 50%;
-        --accent-foreground: 0 0% 4%;
+        /* Blackbird-inspired dark luxury palette */
+        --background: 180 8% 8%;
+        --foreground: 45 30% 96%;
+        --card: 180 10% 10%;
+        --card-foreground: 45 30% 96%;
+        --popover: 180 10% 10%;
+        --popover-foreground: 45 30% 96%;
+        --primary: 48 96% 53%;
+        --primary-foreground: 180 10% 8%;
+        --secondary: 180 6% 15%;
+        --secondary-foreground: 45 30% 96%;
+        --muted: 180 6% 18%;
+        --muted-foreground: 45 10% 55%;
+        --accent: 48 96% 53%;
+        --accent-foreground: 180 10% 8%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 210 40% 98%;
-        --border: 0 0% 18%;
-        --input: 0 0% 18%;
-        --ring: 43 100% 50%;
-        --chart-1: 43 100% 50%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
+        --border: 180 6% 20%;
+        --input: 180 6% 20%;
+        --ring: 48 96% 53%;
         --radius: 0.75rem;
-        --gold: 43 100% 50%;
+        
+        /* Luxury gold tones */
+        --gold: 48 96% 53%;
         --gold-light: 45 100% 70%;
-        --gold-dark: 40 100% 35%;
+        --gold-muted: 45 50% 45%;
+        --gold-dark: 40 80% 35%;
+        
+        /* Deep luxury colors */
+        --deep-teal: 180 8% 8%;
+        --rich-brown: 20 30% 20%;
+        --forest-green: 150 25% 18%;
+        --royal-purple: 280 30% 20%;
+        --navy: 220 30% 15%;
     }
 }
 
@@ -55,26 +61,41 @@ body {
   }
 }
 
+/* Elegant fonts */
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-elegant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 @layer utilities {
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent;
+  }
+  .text-gold {
+    color: #F7E733;
   }
   .bg-gradient-gold {
     @apply bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600;
   }
-  .border-gradient-gold {
-    border-image: linear-gradient(to right, #f59e0b, #fbbf24, #f59e0b) 1;
-  }
   .glow-gold {
-    box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+    box-shadow: 0 0 60px rgba(247, 231, 51, 0.1);
   }
   .glow-gold-strong {
-    box-shadow: 0 0 60px rgba(251, 191, 36, 0.25);
+    box-shadow: 0 0 80px rgba(247, 231, 51, 0.15);
   }
 }
 
-.font-display {
-  font-family: 'Playfair Display', serif;
+/* Art Deco pattern */
+.art-deco-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0z' fill='none' stroke='%23F7E733' stroke-opacity='0.08' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.art-deco-fan {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%23D4AF37' stroke-opacity='0.1' stroke-width='1' d='M0 100 Q50 50 100 100 Q50 50 0 100'/%3E%3Cpath fill='none' stroke='%23D4AF37' stroke-opacity='0.08' stroke-width='1' d='M20 100 Q50 60 80 100'/%3E%3Cpath fill='none' stroke='%23D4AF37' stroke-opacity='0.06' stroke-width='1' d='M35 100 Q50 75 65 100'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
 }
 
 /* Smooth scrolling */
@@ -84,20 +105,20 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: #3a3a3a;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: #4a4a4a;
 }
 
 /* Animations */
@@ -107,8 +128,8 @@ html {
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.5); }
+  0%, 100% { box-shadow: 0 0 20px rgba(247, 231, 51, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(247, 231, 51, 0.4); }
 }
 
 @keyframes shimmer {
@@ -116,16 +137,52 @@ html {
   100% { background-position: 200% 0; }
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-pulse-gold {
-  animation: pulse-gold 2s ease-in-out infinite;
+  animation: pulse-gold 3s ease-in-out infinite;
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(247, 231, 51, 0.1), transparent);
   background-size: 200% 100%;
-  animation: shimmer 2s infinite;
+  animation: shimmer 3s infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+/* Hero overlay for background images */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 25, 23, 0.4) 0%,
+    rgba(20, 25, 23, 0.7) 50%,
+    rgba(20, 25, 23, 0.95) 100%
+  );
+}
+
+/* Membership card styles */
+.membership-card {
+  background: linear-gradient(135deg, rgba(30, 35, 33, 0.9) 0%, rgba(20, 25, 23, 0.95) 100%);
+  border: 1px solid rgba(247, 231, 51, 0.1);
+}
+
+.membership-card:hover {
+  border-color: rgba(247, 231, 51, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(247, 231, 51, 0.1);
 }
