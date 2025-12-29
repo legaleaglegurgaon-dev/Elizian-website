@@ -442,10 +442,16 @@ export default function ElizianLanding() {
                 key={index}
                 className={`relative overflow-hidden rounded-2xl ${tier.bgColor} border ${tier.borderColor} p-6 transition-all duration-500 hover:scale-[1.02] group membership-card`}
               >
-                {/* Tier Badge */}
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r ${tier.color} mb-6`}>
-                  <tier.icon className="w-4 h-4 text-black" />
-                  <span className="text-xs font-semibold text-black tracking-wide">{tier.multiplier}</span>
+                {/* Tier Icon */}
+                <div className="flex items-center justify-between mb-6">
+                  <img 
+                    src={tier.iconUrl} 
+                    alt={`${tier.name} tier icon`}
+                    className="w-14 h-14 object-contain"
+                  />
+                  <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${tier.color} text-xs font-semibold text-black tracking-wide`}>
+                    {tier.multiplier}
+                  </span>
                 </div>
                 
                 <h3 className="text-2xl font-display italic text-white mb-1">{tier.name}</h3>
